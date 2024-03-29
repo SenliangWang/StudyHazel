@@ -47,8 +47,7 @@ namespace Hazel {
 		{
 			return GetCategoryFlags() & category;
 		}
-	protected:
-		bool m_Handled = false;  // 检测当前事件是否还有被响应的能力
+		bool Handled = false;  // 检测当前事件是否还有被响应的能力
 	};
 
 	// 将一个事件和一个函数绑定在一起，当监听的事件被触发时，就激活对应的函数
@@ -88,7 +87,7 @@ namespace Hazel {
 				// Set the event handled flag to the return value of the event listener function
 				// If the event listener function returns true, the event is handled
 				// If the event listener function returns false, the event is not handled
-				m_Event.m_Handled = func(*(T*)&m_Event);
+				m_Event.Handled = func(*(T*)&m_Event);
 				return true;
 			}
 			return false;
