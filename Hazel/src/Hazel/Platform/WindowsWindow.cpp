@@ -1,10 +1,12 @@
 ﻿#include "hzpch.h"
+#include "WindowsWindow.h"
+
 #include "Hazel/Log.h"
 #include "Hazel/Events/ApplicationEvent.h"
 #include "Hazel/Events/KeyEvent.h"
 #include "Hazel/Events/MouseEvent.h"
 
-#include "WindowsWindow.h"
+#include "Glad/glad.h"
 
 namespace Hazel {
 
@@ -42,7 +44,8 @@ namespace Hazel {
 
 		m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, m_Data.Title.c_str(), nullptr, nullptr);
 		glfwMakeContextCurrent(m_Window);
-
+		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
+		assert(status);
 		// Sets the user pointer of the specified window.
 		glfwSetWindowUserPointer(m_Window, &m_Data);
 		SetVSync(true);
@@ -156,6 +159,8 @@ namespace Hazel {
 
 	void WindowsWindow::OnUpdate()
 	{
+		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+		glClear(GL_COLOR_BUFFER_BIT);
 		glfwPollEvents();
 		glfwSwapBuffers(m_Window);
 	}
